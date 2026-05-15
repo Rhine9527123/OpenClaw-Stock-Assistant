@@ -1,0 +1,19 @@
+{
+  "name": "收盘报告Agent",
+  "description": "工作日收盘后发送收盘报告",
+  "enabled": true,
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 20 * * 1-5",
+    "tz": "Asia/Shanghai"
+  },
+  "sessionTarget": "isolated",
+  "payload": {
+    "kind": "agentTurn",
+    "message": "执行收盘报告（Zero-Token 模式）。\n\n直接执行脚本，零 AI 推理：\n```bash\npython skills/stock-daily-report.py --code ${DEFAULT_STOCK_CODE:-588000} --send\n```\n\n只返回 exit code 结果，不生成任何分析。\n预期 Token 消耗: 0",
+    "timeoutSeconds": 180
+  },
+  "delivery": {
+    "mode": "announce"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "晨报自检修复Agent",
+  "description": "每天7:40执行晨报发送前的系统自检和修复",
+  "enabled": true,
+  "schedule": {
+    "kind": "cron",
+    "expr": "40 7 * * *",
+    "tz": "Asia/Shanghai"
+  },
+  "sessionTarget": "isolated",
+  "payload": {
+    "kind": "agentTurn",
+    "message": "执行晨报系统自检修复（优化版）。\n\n## Token优化执行\n直接执行脚本，极简报告：\n\n```bash\npython skills/stock-system-maintenance.py --fix\n```\n\n只报告成功/失败，不输出详细日志。\n\n预期Token消耗: ~100",
+    "timeoutSeconds": 120
+  },
+  "delivery": {
+    "mode": "announce"
+  }
+}
